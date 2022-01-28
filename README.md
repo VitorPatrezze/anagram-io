@@ -1,10 +1,4 @@
-This branch contains the resulting project for this crash course: https://www.youtube.com/watch?v=w7ejDZ8SWv8
-
-It was used as a starting project for the real project: Anagram.io
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# This branch contains the resulting project for this crash course: https://www.youtube.com/watch?v=w7ejDZ8SWv8. It was used as a starting project for the real project: Anagram.io
 
 ## Available Scripts
 
