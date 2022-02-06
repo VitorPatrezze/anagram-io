@@ -1,16 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-function Letter({letter}) {
-  return (
-    <h1 className='letter'>
-      {letter}
-    </h1>
-  )
+function Letter({id, letter, onSubmit}) {
+    return (
+        <input
+            className='letter'
+            type='char'
+            id={id}
+            value={letter}
+            onChange={(e) => (onSubmit(e))} />
+    )
 };
-
-Letter.propTypes = {
-  letter: PropTypes.string.isRequired,
-}
 
 export default Letter;
