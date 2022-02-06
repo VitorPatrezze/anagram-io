@@ -2,23 +2,41 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import Anagram from "./components/Anagram";
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
+  const [anagram, setAnagram] = useState([])
+  const [word, setWord] = useState([])
+
 
   useEffect(() => {
+    const getAnagram = async () => {
+      const anagramFromServer = await fetchAnagram()
+      setAnagram(anagramFromServer.anagram)
+      setWord(anagramFromServer.word)
+    }
+
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks()
-      console.log(tasksFromServer)
       setTasks(tasksFromServer)
     }
-    getTasks()
+    // getTasks()
+    getAnagram()
   }, [])
+
+  // Fetch anagrams
+  const fetchAnagram = async () => {
+    const res = await fetch('http://localhost:8000/anagram/')
+    const data = await res.json()
+    console.log(data)
+    return data
+  }
 
   // Fetch tasks
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+    const res = await fetch('http://localhost:5000/tasks', {mode: 'no-cors'})
     const data = await res.json()
 
     return data
@@ -45,10 +63,6 @@ function App() {
 
     const data = await res.json()
     setTasks([...tasks, data])
-
-    // 
-    // const newTask = { id, ...task }
-    // setTasks([...tasks, newTask])
   }
 
   // Delete Task 
@@ -74,11 +88,20 @@ function App() {
     setTasks(tasks.map((task) => task.id === id ? { ...task, reminder: data.reminder } : task))
   }
 
+  // Refresh Anagram
+  const refreshAnagram = async () => {
+    const anagramFromServer = await fetchAnagram()
+      setAnagram(anagramFromServer.anagram)
+      setWord(anagramFromServer.word)
+  }
+
   return (
     <div className="container">
       <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
       {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Tasks to show')}
+      <Anagram anagram={anagram} onRefresh={() => refreshAnagram()} />
+      <div>{word}</div>
     </div>
   );
 }
