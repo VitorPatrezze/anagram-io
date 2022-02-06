@@ -8,6 +8,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: lightsteelblue;
 }
 
 .container {
@@ -15,20 +16,37 @@ body {
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.anagram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.letter {
+  display: inline-block;
+  border: 2px solid steelblue;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .btn {
-  display: inline-block;
+  display: flex;
   background: #000;
   color: #fff;
   border: none;
