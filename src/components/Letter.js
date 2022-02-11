@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Letter({id, letter, onSubmit}) {
+function Letter({ letter }) {
     return (
-        <input
+        <div
             className='letter'
-            type='char'
-            id={id}
-            value={letter}
-            onChange={(e) => (onSubmit(e))} />
+        >{letter}</div>
     )
 };
 

@@ -7,7 +7,6 @@ function App() {
   const [anagram, setAnagram] = useState("")
   const [word, setWord] = useState("")
 
-
   useEffect(() => {
     const getAnagram = async () => {
       const anagramFromServer = await fetchAnagram()
@@ -29,13 +28,13 @@ function App() {
     const anagramFromServer = await fetchAnagram()
     setAnagram(anagramFromServer.anagram)
     setWord(anagramFromServer.word)
-  }
+  }    
 
   return (
     <div className="container">
       <Header />
       <Anagram anagram={anagram} onRefresh={() => refreshAnagram()} />
-      <Answer length={anagram.length}/>
+      <Answer length={anagram.length} />
     </div>
   );
 }
