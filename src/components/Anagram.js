@@ -1,21 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button'
-import Letter from './Letter'
 
-function Anagram({ anagram, onRefresh }) {
+function Anagram({ anagram, active }) {
+  const anagramStyle = {
+    margin: 'auto',
+    display: 'block',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: (active) ? 'bold' : 'normal',
+    fontSize: (active) ? '28px' : '16px'
+  }
+
   return (
-    <h1 className='anagram'>
+    <p className='anagram' style={anagramStyle}>
       {anagram}
-      <Button color='blue' text='Refresh' onClick={onRefresh} />
-    </h1>
+    </p>
   )
 };
 
 Anagram.propTypes = {
-  anagram: PropTypes.string.isRequired,
+  anagram: PropTypes.string,
 }
 
 export default Anagram;
-
-//{anagram.split('').map((l) => (<Letter key={l+anagram.split().indexOf(l)} letter={l}/>))}

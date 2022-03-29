@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Letter from './Letter'
+import Box from './Box'
 import Input from './Input'
 
-function Answer({ length }) {
-    const [letters, setLetters] = useState([])
+function Answer({ length, word }) {
+    const [letters, setLetters] = useState(Array.apply(null, Array(length)))
     // const [target, setTarget] = useState()
-
-    // useEffect(() => {
-    //     const list = []
-    //     for (var i = 0; i < length; i++) {
-    //         list[i] = ''
-    //     }
-    //     setLetters(list)
-    // }, [])
 
     // Change Letterbox and Target
     const onSubmit = (e) => {
@@ -21,25 +13,28 @@ function Answer({ length }) {
     }
 
     //AnswerBox
-    var form = []
+    var answerDisplay = []
     for (var i = 0; i < length; i++) {
-        form.push(<Letter key={i} id={i} letter={letters[i]}/>);
+        var backgroundColor = "transparent"
+        if (letters[i] === word.charAt(i)) {
+            backgroundColor = "green"
+        }
+        answerDisplay.push(<Box key={i} id={i} letter={letters[i]} backgroundColor={backgroundColor}/>);
     }
 
     return (
-        <div className="answer">
-            {form}
-            <Input letters={letters} maxLength={length} onSubmit={(e) => (onSubmit(e))}/> 
-        </div>
+        <section className="answerSection" >
+            <view className="answer">
+                {answerDisplay} 
+            </view>
+            <Input letters={letters} maxLength={length} onSubmit={(e) => (onSubmit(e))}/>
+        </section>
     )
 };
 
 Answer.propTypes = {
     length: PropTypes.number.isRequired,
+    word: PropTypes.string,
 }
-
+  
 export default Answer;
-
-// //for (let i = 0; i < cars.length; i++) {
-//     text += cars[i] + "<br>";
-// }
