@@ -24,16 +24,16 @@ function Answer({ length, word }) {
 
     return (
         <section className="answerSection" >
-            <view className="answer">
+            <div className="answer">
                 {answerDisplay} 
-            </view>
+            </div>
             <Input letters={letters} maxLength={length} onSubmit={(e) => (onSubmit(e))}/>
         </section>
     )
 };
 
 Answer.propTypes = {
-    length: PropTypes.number.isRequired,
+    length: PropTypes.number,
     word: PropTypes.string,
 }
   

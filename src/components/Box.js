@@ -13,12 +13,12 @@ function Box({ letter, backgroundColor }) {
     }
 
     return (
-        <view
+        <div
             className='box'
             style={boxStyle}
         >
             <Letter letter={letter}/>
-        </view>
+        </div>
     )
 };
 

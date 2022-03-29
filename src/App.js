@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Anagram from "./components/Anagram";
-import Button from "./components/Button"
+import Answer from "./components/Answer";
+import Button from "./components/Button";
 
 function App() {
-  const [anagrams, setAnagrams] = useState(Array({"anagram": "-", "word": "-", "active": false}).fill(5))
+  const [anagrams, setAnagrams] = useState(Array({"anagram": "ttees", "word": "teste", "size": 5}).fill(5))
+  const [activeAnagram, setActiveAnagram] = useState(0)
 
   const qtt = 5
   useEffect(() => {
@@ -24,16 +26,31 @@ function App() {
     for (let i = 0; i < qtt; i++) {
       const anagramFromServer = await fetchAnagram()
       anagramFromServer['id'] = i
-      anagramFromServer['active'] = false
       fetchedAnagrams[i] = anagramFromServer
     }
     console.log(fetchedAnagrams)
     setAnagrams(fetchedAnagrams)
   }
 
+  // Refresh Anagram
+  const setNextActive = async () => {
+    var nextActive = 0
+    if (activeAnagram===qtt-1) {
+      nextActive = 0
+    } else {
+      nextActive = activeAnagram + 1
+    }  
+    setActiveAnagram(nextActive)
+  }
+
   const anagramsDisplay = []
+  var isActive = false
   anagrams.forEach(function (element, i) {
-    anagramsDisplay.push(<Anagram key={i} anagram={element.anagram} word={element.word} active={false}/>)
+    isActive = false
+    if (i===activeAnagram) {
+      isActive = true
+    }
+    anagramsDisplay.push(<Anagram key={i} anagram={element.anagram} word={element.word} active={isActive}/>)
   });
 
   return (
@@ -41,14 +58,10 @@ function App() {
       <Header />
       <div>
         <Button color='blue' text='Refresh' onClick={() => refreshAnagrams()} />
+        <Button color='orange' text='Set Next Active' onClick={() => setNextActive()} />
       </div>
       {anagramsDisplay}
-      {/* <Anagram anagram={anagrams[0].anagram} word={anagrams[0].word}/>
-      <Anagram anagram={anagrams[1].anagram} word={anagrams[1].word}/>
-      <Anagram anagram={anagrams[2].anagram} word={anagrams[2].word}/>
-      <Anagram anagram={anagrams[3].anagram} word={anagrams[3].word}/>
-      <Anagram anagram={anagrams[4].anagram} word={anagrams[4].word}/> */}
-      {/* <Answer length={anagrams[0].anagram.length} /> */}
+      <Answer length={anagrams[activeAnagram].size} word={anagrams[activeAnagram].word}/>
     </div>
   );
 }
