@@ -29,14 +29,6 @@ div {
   align-self: stretch;
 }
 
-.answer {
-  display: flex;
-  padding: 5px ;
-  align-items: center;
-  justify-content: center;  
-  align-self: stretch;
-}
-
 input {
   /* caret-color: transparent; */
   display: block;

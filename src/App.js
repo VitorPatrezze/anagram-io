@@ -28,7 +28,6 @@ function App() {
       anagramFromServer['id'] = i
       fetchedAnagrams[i] = anagramFromServer
     }
-    console.log(fetchedAnagrams)
     setAnagrams(fetchedAnagrams)
   }
 
@@ -58,10 +57,10 @@ function App() {
       <Header />
       <div>
         <Button color='blue' text='Refresh' onClick={() => refreshAnagrams()} />
-        <Button color='orange' text='Set Next Active' onClick={() => setNextActive()} />
+        {/* <Button color='orange' text='Set Next Active' onClick={() => setNextActive()} /> */}
       </div>
       {anagramsDisplay}
-      <Answer length={anagrams[activeAnagram].size} word={anagrams[activeAnagram].word}/>
+      <Answer length={anagrams[activeAnagram].size} word={anagrams[activeAnagram].word} setNextActive={() => setNextActive()}/>
     </div>
   );
 }
